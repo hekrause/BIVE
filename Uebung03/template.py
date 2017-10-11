@@ -29,6 +29,14 @@ def match_Histo(img_histo, ref_histo):
 
     LUT = np.zeros(shape=256, dtype=np.int)
 
+    for a in range(0, 256):
+        j = 256 - 1
+        while (j >= 0 and img_histo[a] <= ref_histo[j]):
+            LUT[a] = j
+            j -= 1
+
+    return LUT
+'''
     for i in range(0, 256):
         P_i = img_histo[i] / img_histo[255]
         for j in range(0, 256):
@@ -46,11 +54,9 @@ def match_Histo(img_histo, ref_histo):
                     LUT[i] = j
                 else:
                     LUT[i] = clamping(j + 1)
-
-    print(LUT)
-
-    return LUT
-
+                    
+    return LUT                
+'''
 
 def apply_LUT(img, lut):
 
