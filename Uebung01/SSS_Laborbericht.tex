@@ -1,0 +1,700 @@
+%---------------
+%╔═╗╔═╗╔╦╗╦ ╦╔═╗
+%╚═╗║╣  ║ ║ ║╠═╝
+%╚═╝╚═╝ ╩ ╚═╝╩  
+%---------------
+
+% language setup
+\newcommand{\docLanguage}{ngerman}
+%\newcommand{\docLanguage}{english}
+
+% DOCUMENT SETUP
+\documentclass[12pt, oneside, a4paper, \docLanguage]{report}
+\usepackage[left=3cm, 
+			right=2.5cm, 
+			top=2.5cm, 
+			bottom=2.5cm, 
+			includehead, 
+			includefoot]{geometry}
+
+% line spacing
+\usepackage{setspace}
+\setstretch{1,25} % 15/12 --> 1.25
+
+% encoding setup
+% T1 font encoding for languages that use a latin alphabet
+\usepackage[T1]{fontenc} 
+
+% enhanced input encoding handling - utf8 for äÄüÜöÖß...
+\usepackage[utf8]{inputenc}
+
+%de­fines Adobe Times Ro­man as de­fault text font
+\usepackage{mathptmx}
+\usepackage{times} % needed for acronym package
+
+%PDF linking package
+\usepackage[hidelinks]{hyperref}
+
+
+% Language Setup
+\usepackage[\docLanguage]{babel}
+% after babel - set chapter string
+\AtBeginDocument{\renewcommand{\chaptername}{}}
+
+% language specific bibliography style
+\usepackage[numbers, square]{natbib}
+%\setcitestyle{square,aysep={},yysep={;}}
+\usepackage[fixlanguage]{babelbib}
+\selectbiblanguage{\docLanguage}
+% bliographystyle setup
+% babel specific: babplain, babplai3, babalpha, babunsrt, bababbrv, bababbr3
+\bibliographystyle{babunsrt}
+
+
+% enumeration
+\usepackage{enumitem}
+% tabular extension tabularx
+\usepackage{tabularx}
+
+% math packages
+\usepackage{amsmath}
+\usepackage{nicefrac}
+\usepackage{amsthm}
+\usepackage{amsbsy}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{MnSymbol}
+
+% patches for latex
+\usepackage{fixltx2e}
+
+%special characters
+\usepackage{amssymb}
+\usepackage{upgreek,textgreek}
+
+% acronym package
+\usepackage[printonlyused, footnote]{acronym}
+
+% breakable text in \seqsplit{}
+\usepackage{seqsplit}
+
+% \textmu
+\usepackage{textcomp}
+
+% package provides a way to compile sections of a document using the same preamble as the main document
+%\usepackage{subfiles}
+
+% driver-independent color extension - used by listings,tabularx
+\usepackage[usenames,dvipsnames,table,xcdraw]{xcolor}
+
+% -- SYNTAX HIGHLIGHTING --
+\usepackage{listings}
+%\input{cfgs/listings/listings_def_lang_bash-cmd.tex} % adds style BASH_CMD
+%\input{cfgs/listings/listings_def_lang_bash-script.tex} % adds style BASH_SCRIPT
+\input{cfgs/listings/listings_def_lang_latex.tex} % adds style LATEX
+%\input{cfgs/listings/listings_def_lang_matlab.tex} % adds style MATLAB
+\input{cfgs/listings/listings_def_lang_python.tex} % adds style PYTHON
+%\input{cfgs/listings/listings_def_lang_c++.tex} % adds style CPP
+%\input{cfgs/listings/listings_def_lang_c.tex} % adds style C
+%\input{cfgs/listings/listings_def_lang_json.tex} % adds style JSON
+
+% HEADLINE CFG
+\usepackage{fancyhdr} % Headers and footers
+\usepackage{lastpage}
+\usepackage{nopageno}
+\setlength{\headheight}{1.5cm}
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[L]{}
+\fancyhead[C]{}
+\fancyhead[R]{}
+\fancyfoot[L]{}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{}
+% override plain page style for \part, \chapter or 
+% \maketitle, which implicit specifies plain page style
+\input{cfgs/fancyhdr/fancyhdr_pagestyle_plain.tex}
+% set list pagestyle
+\input{cfgs/fancyhdr/fancyhdr_pagestyle_lists.tex}
+
+\renewcommand{\chaptermark}[1]{\markright{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+	
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+
+% floating prevention packages
+\usepackage{float}    % used with [H] positioning parameter
+\usepackage{placeins} % \FloatBarrier 
+
+% tikz packages
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage[list=true,listformat=simple]{subcaption}
+\usepackage{standalone}
+\usepackage{pgfplots}
+
+
+% include only specified tex files - uncommend here
+\includeonly{preface/cover,
+             preface/abstract,
+             preface/tableofcontents,
+             preface/listoffigures,
+             preface/listoftables,
+             preface/lstlistoflistings,
+             appendix/bibliography}
+
+%-------------------
+%╔═╗╔╦╗╦═╗╦╔╗╔╔═╗╔═╗
+%╚═╗ ║ ╠╦╝║║║║║ ╦╚═╗
+%╚═╝ ╩ ╩╚═╩╝╚╝╚═╝╚═╝
+%-------------------
+\newcommand{\strLecture}{Signale, Systeme und Sensoren}
+\newcommand{\strDate}{\today}
+\newcommand{\strAuthorA}{Henning Krause}
+\newcommand{\strAuthorB}{Andreas M. Reumschüssel}
+%\newcommand{\strAuthorC}{C. Author}
+\newcommand{\strAuthorAEmail}{henning.krause@htwg-konstanz.de}
+\newcommand{\strAuthorBEmail}{andreas.reumschuessel@htwg-konstanz.de}
+%\newcommand{\strAuthorCEmail}{cauthor@htwg-konstanz.de}
+% Versuchsbeschreibung 
+\newcommand{\strTopic}{Fourieranalyse und Akustik}
+%TODO: Noch ausführlicher
+\newcommand{\strAbstract}{Bei diesem Versuch sollten die Grundsätze der Fourieranalyse praktisch verwendet werden. Dies wird umgesetzt mit der Analyse eines Tons, welcher durch eine Mundharmonika erzeugt wird. Dieser Ton wird auf seine Frequenz durch ein Messsystem ermittelt. Das Messsystem besteht dabei aus einem Mikrofon, welches an ein Oszilloskop angeschlossen ist. Ein weiterer Versuch ist die Analyse zweier Lautsprecher. Sie werden durch einen Frequenzgenerator mit festen Frequenzen gespeist und anhand einem Mikrofon und Oszilloskop wird die Phasenverschiebung sowie die Amplitude abgelesen. Nach ermitteln der Messergebnisse wird das Messsystem, besonders das Mikrofon, auf seine optimalen Messbereiche überprüft.}
+% hyperref customization
+\hypersetup{
+	pdftitle     = {\strTopic}, % title
+	pdfsubject   = {\strLecture}, % subject of the document
+	pdfauthor    = {\strAuthorA, \strAuthorB}, % author
+	pdfkeywords  = {}, % list of keywords
+	pdfcreator   = {}, % creator of the document
+	pdfproducer  = {}, % producer of the document
+	colorlinks   = false, % false: boxed links; true: colored links
+	linkcolor    = red, % color of internal links (change box color with linkbordercolor)
+	citecolor    = green, % color of links to bibliography
+	filecolor    = magenta, % color of file links
+	urlcolor     = cyan, % color of external links
+	%bookmarks    = true, % show bookmarks bar?
+	unicode	     = true, % non-Latin characters in Acrobat’s bookmarks
+	pdftoolbar   = true, % show Acrobat’s toolbar?
+	pdfmenubar   = true, % show Acrobat’s menu?
+	pdffitwindow = false, % window fit to page when opened
+	pdfnewwindow = true % links in new PDF window
+}
+
+%-----------------------------------------
+% ╔╗ ╔═╗╔═╗╦╔╗╔  ╔╦╗╔═╗╔═╗╦ ╦╔╦╗╔═╗╔╗╔╔╦╗ 
+% ╠╩╗║╣ ║ ╦║║║║   ║║║ ║║  ║ ║║║║║╣ ║║║ ║  
+% ╚═╝╚═╝╚═╝╩╝╚╝  ═╩╝╚═╝╚═╝╚═╝╩ ╩╚═╝╝╚╝ ╩  
+%-----------------------------------------
+
+\begin{document}
+\pagenumbering{Roman} 
+
+%\setcounter{section}{0}
+\include{preface/cover}
+
+\include{preface/abstract}
+\clearpage
+
+%
+% TABLE OF CONTENTS
+%
+\include{preface/tableofcontents}
+
+%
+% Abbildungsverzeichnis
+%
+\include{preface/listoffigures}
+
+%
+% Tabellenverzeichnis
+%
+\include{preface/listoftables}
+
+%
+% Listingverzeichnis
+%
+\include{preface/lstlistoflistings}
+
+
+%--------------------------
+% ╔═╗╦ ╦╔═╗╔═╗╔╦╗╔═╗╦═╗╔═╗ 
+% ║  ╠═╣╠═╣╠═╝ ║ ║╣ ╠╦╝╚═╗ 
+% ╚═╝╩ ╩╩ ╩╩   ╩ ╚═╝╩╚═╚═╝ 
+%--------------------------
+
+\pagenumbering{arabic} 
+\setcounter{page}{1}
+%
+% CHAPTER Einleitung
+%
+\chapter{Einleitung}
+\label{chap:EINL}
+
+In diesem Versuch soll Mithilfe eines Mikrofons und zwei Lautsprechern die Fourieranalyse auf akustische Signale angewandt werden. Zuerst wird der Versuchsaufbau mit einem etwas einfacherem Versuch mit einer Mundharmonika auf Funktionalität geprüft. Aus den dabei Entstandenen Messwerten werden die Grundlegenden Eigenschaften einer Schwingung berechnet. Im Zweiten Versuch wird dann eine Messreihe gemessen, bearbeitet und in einem Bode-Diagramm bewertet. Erwartet werden aus dem Bode-Diagramm Rückschlüsse auf das Übertragungsverfahren des Systems. Das System besteht in diesem Fall aus dem Frequenzgenerator, dem Mikrofon, dem Lautsprecher und dem Oszilloskop.
+
+%
+% CHAPTER Versuch 1
+%
+\chapter{Versuch 1}
+\label{chap:VERSUCH_1}
+
+\section{Fragestellung, Messprinzip, Aufbau, Messmittel}
+\label{chap:VERSUCH_1_FRAGESTELLUNG}
+
+%TODO: Fragestellung: Ermittlung Tonhöhe, später FFT
+Im Ersten Versuch soll ein Ton aus einer Mundharmonika mit einem Mikrofon aufgenommen und analysiert werden. Dazu wird zunächst das Mikrofon mit dem Oszilloskop am Eingang "CH1" verschaltet. Durch austesten der Mundharmonika mit dem Mikrofon wird die Auflösung des Oszilloskop so eingestellt das aus dem Bildausschnitt die geforderten Werte abgelesen werden können. Mit einem Python-Skript (Listingverzeichnis \ref{lst:Mundharmonika}) wird dann eine Grafik und der Signalverlauf mit der Signalstärke über Zeit als csv gespeichert. \\
+In Grafik \ref{fig:Mundharmonika} ist ein Bild des Mundharmonika-Tons und in der Tabelle \ref{tab:Mundharmonika} die dazugehörigen Messwerte zu sehen.
+
+\newpage
+
+\section{Messwerte}
+\label{chap:VERSUCH_1_MESSWERTE}
+
+Das Plot-Bild \ref{fig:Mundharmonika} wurde mit dem Python-Skript \ref{lst:Mundharmonika} aufgenommen.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{media/Bilder/Mundharmonika.png}
+	\caption[Mundharmonika]{Grafik des Mondharmonika-Tons}
+	\label{fig:Mundharmonika}
+\end{figure}
+
+Folgende Messwerte können dabei aus der Grafik abgelesen werden:
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\multicolumn{1}{|c|}{Grundperiode (in ms)} & \multicolumn{1}{c|}{1,12} \\ \hline
+		Grundfrequenz (in Hz) & 885 \\ \hline
+		Signaldauer (in s) & 0,05 \\ \hline
+		Abtastfrequenz (in KHz) & 50 \\ \hline
+		Signallänge & 2500 \\ \hline
+		Abtastintervall (in s) & 0,00002 \\ \hline
+	\end{tabular}
+	\caption{Messwerte des Mundharmonika-Tons}
+	\label{tab:Mundharmonika}
+\end{table}
+
+\newpage
+
+Die Messwerte aus Tabelle \ref{tab:Mundharmonika} werden alle optisch aus der Grafik \ref{fig:Mundharmonika} und deren csv Datei ausgelesen. Die Grundperiode wird Mithilfe von LibreCalc ausgelesen.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\multicolumn{1}{|c|}{Index} &
+		\multicolumn{1}{|c|}{Zeit des Signals (in µs)} &
+		 \multicolumn{1}{c|}{Volt (in V)} \\ \hline
+		1 & -0,02498 & -0,00640 \\ \hline
+		2 & -0,02496 & -0,00688 \\ \hline
+		3 & -0,02494 & -0,00664 \\ \hline
+		... & ... & ... \\ \hline
+		19 & -0,02474  & -0,00264 \\ \hline
+		20 & -0,02472  & -0,00136 \\ \hline
+		21 & -0,02470  & 0 \\ \hline
+		22 & -0,02468  & -0,00164 \\ \hline
+		23 & -0,02466  & -0,00244 \\ \hline
+		... & ... & ... \\ \hline
+		78 & -0,02356  & 0 \\ \hline
+	\end{tabular}
+	\caption{Ermittlung der Grundperiode}
+	\label{tab:Grundperiode}
+\end{table}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\linewidth]{media/Bilder/Grundperiode.png}
+	\caption[Grundperiode]{Ermittlung der Grundperiode}
+	\label{fig:Grundperiode}
+\end{figure}
+
+\newpage
+
+Durch Subtraktion der Zeit des Signals bei Index 21 mit der Zeit des Signals bei Index 78 kommt man auf die Grundperiode. 
+\begin{equation}
+(-0,02470\mu s-(-0,02356\mu s))/1000 = 1,12 ms. 
+\end{equation}
+
+Die anderen Werte aus der Tabelle wurden während des Versuchs notiert.
+
+\section{Auswertung}
+\label{chap:VERSUCH_1_AUSWERTUNG}
+Mithilfe des Python-Skripts \ref{lst:Amplitudenspektrum_plotten} wird das Amplitudenspektrum erzeugt.
+Danach wird mit der argmax() Funktion aus der numpy Bibliothek der Maximalwert  $n$ des Amplitudenspektrums gesucht und in die gegeben Funktion \ref{Grundfrequenz} eingesetzt.
+
+\begin{equation}\label{Grundfrequenz}
+f = \frac{n}{M \cdot \Delta t}
+\end{equation}
+
+mit $n$ = 44, M = 2500 und $\Delta$ t = 0,00002 s ergibt sich somit für die Grundfrequenz eine Frequenz von 880 Hz welche von der über die Grundperiode ermittelten Grundfrequenz mit 885 Hz nur leicht abweicht.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\linewidth]{media/Bilder/Amplitudenspektrum.png}
+	\caption[Amplitudenspektrum]{Grafik des Amplitudenspektrum}
+	\label{fig:Amplitudenspektrum}
+\end{figure}
+
+\section{Interpretation}
+\label{chap:VERSUCH_1_INTERPRETATION}
+
+Durch die Fouriertransformation wurde die Grundfrequenz bestimmt. 
+Diese berechnete Grundfrequenz stimmte mit unserer zuvor abgelesenen Grundfrequenz (siehe Tabelle \ref{tab:Mundharmonika}) beinahe überein.
+
+%
+% CHAPTER Versuch 2
+%
+\chapter{Versuch 2}
+\label{chap:VERSUCH_2}
+
+
+\section{Fragestellung, Messprinzip, Aufbau, Messmittel}
+\label{chap:VERSUCH_2_FRAGESTELLUNG}
+
+%TODO: Fragestellung?
+In diesem Versuch wird zuerst zum Versuchsaufbau vom vorherigen Versuch ein Board mit zwei Lautsprechern hinzugefügt. Der benutzte Lautsprecher wird vom Frequenzgenerator mit Strom versorgt. Zur Schonung der Nerven wird noch ein Schalter zwischen Lautsprecher und Generator verschaltet. Ein weiteres Kabel verbindet den Generator mit "CH2" des Oszilloskops. Die Darstellung des Signals wird am Oszilloskop so eingestellt das mehrere Maxima oder Minima zu sehen sind. Die Spannung wird immer wieder auf 1,5 Volt nachkorrigiert. Vor dem festhalten des Signals mit ,,SINGEL SEQ'' wird am Generator die geforderte Frequenz eingestellt.
+
+\newpage
+
+\section{Messwerte}
+\label{chap:VERSUCH_2_MESSWERTE}
+
+Die während des Versuchs ermittelten Messwerte.
+
+%TODO: Volt?
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+		\multicolumn{1}{|c}{} &
+		\multicolumn{1}{|c}{Lautsprecher 1} &
+		\multicolumn{1}{c}{} &
+		\multicolumn{1}{|c}{Lautsprecher 2} &
+		\multicolumn{1}{c|}{} \\ \hline
+		\multicolumn{1}{|c}{Frequenz} &
+		\multicolumn{1}{|c}{Phasenverschiebung} &
+		\multicolumn{1}{|c}{Amplitude} &
+		\multicolumn{1}{|c}{Phasenverschiebung} &
+		\multicolumn{1}{|c|}{Amplitude} \\ \hline
+		in Hz & in µs & in mV & in µs & in mV \\ \hline
+		100 & 9300 & 9,2 & 8000 & 1,36 \\ \hline
+		200 & 6700 & 34,4 & 5400 & 4 \\ \hline
+		300 & 1800 & 22,4 & 3900 & 6,72 \\ \hline
+		400 & 1400 & 16,4 & 3200 & 15,8 \\ \hline
+		500 & 1200 & 12,2 & 2960 & 29,2 \\ \hline
+		700 & 900 & 11,2 & 2340 & 14 \\ \hline
+		850 & 780 & 9,8 & 1980 & 9,6 \\ \hline
+		1000 & 720 & 10 & 1720 & 8,4 \\ \hline
+		1200 & 600 & 9,2 & 1460 & 6,8 \\ \hline
+		1500 & 500 & 8,6 & 1160 & 10 \\ \hline
+		1700 & 470 & 9,2 & 1040 & 9,2 \\ \hline
+		2000 & 410 & 10 & 900 & 9,6 \\ \hline
+		3000 & 320 & 9,6 & 650 & 11,6 \\ \hline
+		4000 & 296 & 11,8 & 560 & 11,6 \\ \hline
+		5000 & 270 & 9,6 & 492 & 8 \\ \hline
+		6000 & 250 & 11 & 464 & 1,6 \\ \hline
+		10000 & 130 & 5,4 & 318 & 2 \\ \hline
+	\end{tabular}
+	\caption{Messergebnisse des Versuchs}
+	\label{tab:Messergebnisse}
+\end{table}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{media/Bilder/Amplitudengang_Lautsprecher_1.png}
+	\caption[Amplitudengang1]{Grafik des Amplitudengangs von Lautsprecher 1}
+	\label{fig:Amplitudengang1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{media/Bilder/Phasengang_Lautsprecher_1.png}
+	\caption[Phasengang1]{Grafik des Phasengangs von Lautsprecher 1}
+	\label{fig:Phasengang1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{media/Bilder/Amplitudengang_Lautsprecher_2.png}
+	\caption[Amplitudengang2]{Grafik des Amplitudengangs von Lautsprecher 2}
+	\label{fig:Amplitudengang2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{media/Bilder/Phasengang_Lautsprecher_2.png}
+	\caption[Phasengang2]{Grafik des Phasengangs von Lautsprecher 2}
+	\label{fig:Phasengang2}
+\end{figure}
+
+\newpage
+
+\section{Interpretation}
+\label{chap:VERSUCH_2_INTERPRETATION}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{media/Bilder/Bode_Diagramm_L1.png}
+	\caption[BodeDiagrammL1]{Bode-Diagramm des großen Lautsprechers}
+	\label{fig:BodeDiagrammL1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{media/Bilder/Bode_Diagramm_L2.png}
+	\caption[BodeDiagrammL2]{Bode-Diagramm des kleinen Lautsprechers}
+	\label{fig:BodeDiagrammL2}
+\end{figure}
+
+\newpage
+
+Wenn man die Bode-Diagramme der beiden Lautsprecher vergleicht, dann wird klar erkennbar, dass bei steigender Frequenz auch die Phasenverschiebung zunimmt.
+Des Weiteren lässt sich erkennen, dass der kleinere Lautsprecher einen konstanteren Schalldruck im Bereich von 100Hz bis 6000Hz ausgibt, sowie den Maximalwert der Amplitude bei einer höheren Frequenz hat als der große Lautsprecher. Dies hängt damit zusammen, dass der kleine Lautsprecher durch seine Baugröße besser höhere Frequenzen wiedergeben kann. Der große Lautsprecher hingegen hat einen geringeren Schalldruck bei gleicher Frequenz auch bedingt durch seine Baugröße. Denn dieser hat viel mehr Masse zu bewegen und wahrscheinlich einen höheren Widerstand. Die Wiedergabestärke des Mikrofons ist von 100Hz bis 2000Hz konstant, steigt etwas bis 10kHz und fällt ab 13kHz steil ab. Daher ist die Messung von 100Hz bis 10kHz sehr gut für das Mikrofon geeignet. 
+
+%
+% CHAPTER Anhang
+%
+\renewcommand\thesection{A.\arabic{section}}
+\renewcommand\thesubsection{\thesection.\arabic{subsection}}
+
+\chapter*{Anhang}
+\label{chap:APPENDIX}
+\addcontentsline{toc}{chapter}{Anhang}
+%\setcounter{chapter}{0}
+\addtocounter{chapter}{1}
+\setcounter{section}{0}
+
+\section{Quellcode}
+\label{chap:APPENDIX_SOURCECODE}
+
+\subsection{Quellcode Versuch 1}
+\label{chap:APPENDIX_SOURCECODE_V1}
+\begin{lstlisting}[style=PYTHON, frame=single, caption=Grafik des Mundharmonika-Tons, captionpos=b, label=lst:Mundharmonika]
+# -*- coding: utf-8 -*-
+
+
+import numpy as np
+
+from TekTDS2000 import *
+
+import matplotlib.pyplot as plt
+
+
+scope = TekTDS2000()
+
+
+data = scope.getData(ch=1,strt=1,end=2500)[1]
+
+
+scope.saveCsv(filename='Mundharmonika.csv', ch=1,strt=1,end=2500)
+
+scope.plot(ch=1, filename='Mundharmonika.png')
+
+
+del scope
+\end{lstlisting}
+
+\begin{lstlisting}[style=PYTHON, frame=single, caption=Amplitudenspektrum plotten, captionpos=b, label=lst:Amplitudenspektrum_plotten]
+# -*- coding: utf-8 -*-
+
+
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+
+voltage = np.zeros(2500, dtype=np.double)
+
+time = np.zeros(2500, dtype=np.double)
+
+
+data=np.genfromtxt('mundharmonika.csv', delimiter=',')  
+
+
+for element in range(2499):
+
+voltage[element] = data[element][1] 
+
+
+print(voltage)
+
+
+spectrum = np.fft.fft(voltage)
+
+
+deltaT = 1/1000000000
+
+grundFrequenz = 1/(np.argmax(abs(spectrum))*(deltaT))
+
+
+spec = abs(spectrum[0:len(spectrum)/2])
+
+max_value = np.argmax(spec)
+
+amp = spec[max_value]
+
+freq = np.linspace(0,1000000000/2, len(spec))
+
+
+plt.figure("Amplitudenspektrum")
+
+plt.xlabel('Frequenz')
+
+plt.ylabel('Amplitude')
+
+plt.plot(freq, spec)
+
+plt.grid(True)
+
+fig1 = plt.gcf()
+
+plt.show()
+
+plt.draw()
+
+fig1.savefig('Amplitudenspektrum.png', dpi=300)
+\end{lstlisting}
+
+\newpage
+
+\subsection{Quellcode Versuch 2}
+\label{chap:APPENDIX_SOURCECODE_V2}
+
+\begin{lstlisting}[style=PYTHON, frame=single, caption=Phasengang und Frequenzgang, captionpos=b, label=lst:Gaenge]
+
+# -*- coding: utf-8 -*-
+"""
+Created on Tue May 24 03:11:56 2016
+
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+frequenzen = [100, 200, 300, 400, 500, 700, 850, 1000, 1200, 1500, 1700, 2000, 3000, 4000, 5000, 6000, 10000]
+speaker1P = [9300, 6700, 1800, 1400, 1200, 900, 780, 720, 600, 500, 470, 410, 320, 296, 270, 250, 130]
+speaker2P = [8000, 5400, 3900, 3200, 2960, 2340, 1980, 1720, 1460, 1160, 1040, 900, 650, 560, 492, 464, 318]
+speaker1A = [9.2, 34.4, 22.4, 16.4, 12.2, 11.2, 9.8, 10, 9.2, 8.6, 9.2, 10, 9.6, 11.8, 9.6, 11, 5.4]
+speaker2A = [1.36, 4, 6.72, 15.8, 29.2, 14, 9.6, 8.4, 6.8, 10, 9.2, 9.6, 11.6, 11.6, 8, 1.6, 2]
+
+plt.figure("Phasengang Lautsprecher 1")
+plt.xlabel('Frequenz[Hz]')
+plt.ylabel('Phasenverschiebung[\mu s]')
+plt.plot(frequenzen, speaker1P)
+plt.grid(True)
+fig = plt.gcf()
+plt.show()
+plt.draw()
+fig.savefig('Phasengang_Lautsprecher_1.png', dpi=300)
+
+plt.figure("Phasengang Lautsprecher 2")
+plt.xlabel('Frequenz[Hz]')
+plt.ylabel('Phasenverschiebung[\mu s]')
+plt.plot(frequenzen, speaker2P)
+plt.grid(True)
+fig = plt.gcf()
+plt.show()
+plt.draw()
+fig.savefig('Phasengang_Lautsprecher_2.png', dpi=300)
+
+plt.figure("Amplitudengang Lautsprecher 1")
+plt.xlabel('Frequenz[Hz]')
+plt.ylabel('Amplitude[mV]')
+plt.plot(frequenzen, speaker1A)
+plt.grid(True)
+fig = plt.gcf()
+plt.show()
+plt.draw()
+fig.savefig('Amplitudengang_Lautsprecher_1.png', dpi=300)
+
+plt.figure("Amplitudengang Lautsprecher 1")
+plt.xlabel('Frequenz[Hz]')
+plt.ylabel('Amplitude[mV]')
+plt.plot(frequenzen, speaker2A)
+plt.grid(True)
+fig = plt.gcf()
+plt.show()
+plt.draw()
+fig.savefig('Amplitudengang_Lautsprecher_2.png', dpi=300)
+
+\end{lstlisting}
+
+\begin{lstlisting}[style=PYTHON, frame=single, caption=Bode-Diagramm beider Lautsprecher, captionpos=b, label=lst:Bode]
+
+# -*- coding: utf-8 -*-
+"""
+Created on Tue May 24 04:26:06 2016
+
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+frequenzen = [100, 200, 300, 400, 500, 700, 850, 1000, 1200, 1500, 1700, 2000, 3000, 4000, 5000, 6000, 10000]
+phasenL1 = [9300, 6700, 1800, 1400, 1200, 900, 780, 720, 600, 500, 470, 410, 320, 296, 270, 250, 130]
+phasenL2 = [9300, 6700, 1800, 1400, 1200, 900, 780, 720, 600, 500, 470, 410, 320, 296, 270, 250, 130]
+winkelL1 = [-334.8, -482.4, -554.4, -561.6, -576, -586.8, -598.68, -619.2, -619.2, -630, -647.64, -655.2, -705.6, -786.24, -846, -900, -1188]
+winkelL2 = [-288, -388.8, -421.2, -460.8, -532.8, -589.68, -605.88, -619.2, -630.72, -626.4, -636.48, -648, -702, -806.4, -885.6, -1002.24, -1144.8]
+uoutL1 = [9.2, 34.4, 22.4, 16.4, 12.2, 11.2, 9.8, 10, 9.2, 8.6, 9.2, 10, 9.6, 11.8, 9.6, 11, 5.4]
+uoutL2 = [1.36, 4, 6.72, 15.8, 29.2, 14, 9.6, 8.4, 6.8, 10, 9.2, 9.6, 11.6, 11.6, 8, 1.6, 2]
+
+for i in range(len(uoutL1)):
+uoutL1[i] = 20*np.log10(uoutL1[i]/1.5)
+
+plt.figure(1)
+plt.subplot(211)
+plt.xlabel("Frequenz[Hz]")
+plt.ylabel("Winkel[Grad]")
+plt.grid(True)
+plt.semilogx(frequenzen, winkelL1)
+
+plt.subplot(212)
+plt.xlabel("Frequenz[Hz]")
+plt.ylabel("Amplitude[dB]")
+plt.grid(True)
+plt.plot(frequenzen, uoutL1)
+plt.savefig("Bode_Diagramm_L1.png", dpi=300, format="png")
+plt.show()
+
+#---------------------------------------------
+
+for i in range(len(uoutL2)):
+uoutL2[i] = 20*np.log10(uoutL2[i]/1.5)
+
+plt.figure(1)
+plt.subplot(211)
+plt.xlabel("Frequenz[Hz]")
+plt.ylabel("Winkel[Grad]")
+plt.grid(True)
+plt.semilogx(frequenzen, winkelL2)
+
+plt.subplot(212)
+plt.xlabel("Frequenz[Hz]")
+plt.ylabel("Amplitude[dB]")
+plt.grid(True)
+plt.plot(frequenzen, uoutL2)
+plt.savefig("Bode_Diagramm_L2.png", dpi=300, format="png")
+plt.show()
+
+
+\end{lstlisting}
+
+
+%
+% Literaturverzeichnis
+%
+\include{appendix/bibliography}
+
+\end{document}
+%------------------------------------
+% ╔═╗╔╗╔╔╦╗  ╔╦╗╔═╗╔═╗╦ ╦╔╦╗╔═╗╔╗╔╔╦╗
+% ║╣ ║║║ ║║   ║║║ ║║  ║ ║║║║║╣ ║║║ ║ 
+% ╚═╝╝╚╝═╩╝  ═╩╝╚═╝╚═╝╚═╝╩ ╩╚═╝╝╚╝ ╩ 
+%------------------------------------

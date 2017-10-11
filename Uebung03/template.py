@@ -2,7 +2,6 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-import math
 
 
 def compute_cumHisto(img, binSize=1):
@@ -24,20 +23,31 @@ def bin_Histo(img, bin=1):
 
 
 def match_Histo(img_histo, ref_histo):
-
     #img_histo . . . original histogram
     #ref_histo . . . reference histogram
     #returns the mapping function LUT to be applied to the image
 
     LUT = np.zeros(shape=256, dtype=np.int)
 
-    for i in range(0,255):
+    for i in range(0, 256):
         P_i = img_histo[i] / img_histo[255]
-        for j in range(0, 255):
+        for j in range(0, 256):
             P_j = ref_histo[j] / ref_histo[255]
-            if P_i == P_j :
-                LUT[i] = j
-                break;
+
+            if j < 255:
+                P_j_next = ref_histo[j + 1] / ref_histo[255]
+            else:
+                P_j_next = 1
+
+            if P_i > P_j and P_i <= P_j_next:
+                difference_i_j = P_i - P_j
+                difference_i_j_next = P_j_next - P_i
+                if difference_i_j < difference_i_j_next:
+                    LUT[i] = j
+                else:
+                    LUT[i] = clamping(j + 1)
+
+    print(LUT)
 
     return LUT
 
@@ -53,9 +63,13 @@ def apply_LUT(img, lut):
     return img
 
 
+def clamping(value):
+    if value > 255:
+        return 255
+    else:
+        return value
 
 def rgb2gray(rgb):
-
     # convert to grayscale image (only one channel)
     return rgb.convert('L')
 

@@ -1,10 +1,12 @@
+from builtins import print
+
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 
 def compute_Histo(img):
-
+    
     histo = np.zeros(shape=(256))
 
     for x in range(0, img.width):
@@ -17,7 +19,7 @@ def compute_Histo(img):
 
 def bin_Histo(img, bin=1):
     intervalls = np.ceil(256 / bin)
-    histo = np.zeros(shape=intervalls)
+    histo = np.zeros(shape=intervalls, dtype=np.int)
 
     for x in range(0, img.width):
         for y in range(0, img.height):
@@ -29,57 +31,50 @@ def bin_Histo(img, bin=1):
 
 
 def brighten(img, offset):
-
-    pixel_map = img.load()
-
     # add offset to img
     for x in range(0, img.width):
         for y in range(0, img.height):
             edit = img.getpixel((x, y)) + offset
             # check clamping
             if edit > 255 : edit = 255
-            pixel_map[x, y] = edit
+            img.putpixel((x, y), edit)
 
     return img
 
 
 def get_lut(k=256):
-
     # create lut-table
     # which only brightens the darker pixel values (e.g. < 200)
     # bright pixel values should not change that much
-    lut = np.zeros(shape=256)
+    lut = np.zeros(shape=256, dtype=np.int)
 
-    for i in range(0, 255):
+    for i in range(0, 256):
         lut[i] = i
-        if i > 200 : lut[i] = i + k
-        # check clamping
-        if lut[i] > 255 : lut[i] = 255
+        if i < 200:
+            # check clamping
+            if (i + k) > 255:
+                lut[i] = 255
+            else:
+                lut[i] = i + k
 
     return lut
 
 
 def brighten_with_lut(img, lut):
-
-    pixel_map = img.load()
-
-    # add offset to img
     for x in range(0, img.width):
         for y in range(0, img.height):
             edit = img.getpixel((x, y))
-            pixel_map[x, y] = (x, y, lut[edit])
+            img.putpixel((x, y), lut[edit].item())
 
     return img
 
 
 def rgb2gray(img):
-
     # convert to grayscale image (only one channel)
     return img.convert('L')
 
 
 if __name__ == "__main__":
-
     # read img
     img = Image.open("bild01.jpg")
 
@@ -90,14 +85,11 @@ if __name__ == "__main__":
     #img = brighten(img, 0)
 
     # brighten image with lut-table
-    #img = brighten_with_lut(img, get_lut(0))
-
-    img.save("test.jpg")
+    img = brighten_with_lut(img, get_lut(50))
 
     # compute histogram (with bin-size)
     #histo = bin_Histo(img, 1)
 
-'''
     # convert to numpy array
     histo = compute_Histo(img)
 
@@ -116,4 +108,3 @@ if __name__ == "__main__":
     plt.imshow(img, cmap = cm.Greys_r)
 
     plt.show()
-'''
